@@ -1,0 +1,10 @@
+/.idea
+/src
+/bin
+/pkg
+gin-bin
+config.override.toml
+app
+data-api
+api
+vendor/

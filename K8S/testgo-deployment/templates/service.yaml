@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: testgo-service
+spec:
+  selector:
+    app: testgo
+  ports:
+  - protocol: TCP
+    targetPort: 8080
+    port: 80
+    name: http
+  type: NodePort

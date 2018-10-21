@@ -1,0 +1,18 @@
+{
+  "app": {
+    "host": "192.168.99.101",
+    "port": "8080",
+    "enabled": true
+  },
+  "mongodb": {
+    "name": "mongodb",
+    "driver": "mongodb",
+    "dsn": "192.168.99.101:27117",
+    "host": "192.168.99.101",
+    "port": "27017",
+    "username": "",
+    "password": "",
+    "db_name": "movie_api",
+    "options": {}
+  }
+}
