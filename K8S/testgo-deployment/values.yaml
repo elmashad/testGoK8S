@@ -1,0 +1,19 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: elmashad/testgo
+  tag: v1
+  pullPolicy: Always
+service:
+  name: http
+  type: NodePort
+  externalPort: 80
+  internalPort: 8080
+resources:
+  limits:
+    cpu: 500m
+    memory: 250Mi
+  requests:
+    cpu: 10m
+    memory: 50Mi

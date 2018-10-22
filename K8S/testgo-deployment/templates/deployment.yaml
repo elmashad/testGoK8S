@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+      - name: {{.Chart.Name}}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: APP_CONFIG
+          value: '{
+              "app": {
+                "host": "localhost",
+                "port": "8080",
+                "enabled": true
+              },
+              "mongodb": {
+                "name": "mongodb",
+                "driver": "mongodb",
+                "dsn": "mongodb://report:report1020@fallacious-chimp-mongodb.default.svc.cluster.local:27017/movie_api?replicaSet=rs0&authSource=movie_api",
+                "host": "",
+                "port": "27017",
+                "username": "",
+                "password": "",
+                "db_name": "movie_api",
+                "options": {}
+              }
+            }'
+        ports:
+        - name: internalport
+          containerPort: {{ .Values.service.internalPort }}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}

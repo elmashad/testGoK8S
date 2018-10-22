@@ -1,13 +1,15 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: testgo-service
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 spec:
-  selector:
-    app: testgo
+  type: {{ .Values.service.type }}
   ports:
-  - protocol: TCP
-    targetPort: 8080
-    port: 80
-    name: http
-  type: NodePort
+  - port: {{ .Values.service.externalPort }}
+    targetPort: {{ .Values.service.internalPort }}
+    protocol: TCP
+    name: {{ .Values.service.name }}
+  selector:
+    app: {{ template "fullname" . }}
